@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --max-lines: 3;
+    --line-height: 1.4;
+}
+
+body{
+    display: flex;
+    margin-top: 40vh;
+    justify-content: center;
+}
+
+article:nth-child(1){
+    width: 200px;
+    
+    border: 1px solid #ccc;
+
+    padding: 10px;
+}
+
+p::before{
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+
+    height: calc(1em * var(--line-height));
+
+    width: 100%;
+}
+
+p{
+    max-height: calc(var(--max-lines) * 1em * var(--line-height));
+
+    line-height: var(--line-height);
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+.expand{
+    appearance: none;
+
+    cursor: pointer;
+
+    padding: 5px;
+}
+
+.expand::before{
+    content: "Ver mais";
+    color: blue;
+}
+
+.expand:checked::before{
+    content: "Ver menos"
+}
+
+p:has(+ .expand:checked){
+    max-height: none;
+}
